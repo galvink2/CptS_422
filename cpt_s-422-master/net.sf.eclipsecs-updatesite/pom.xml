@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>net.sf.eclipsecs.parent</artifactId>
+        <groupId>net.sf.eclipsecs</groupId>
+        <version>8.35.0-SNAPSHOT</version>        
+        <relativePath>../eclipse-cs/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>net.sf.eclipsecs-updatesite</artifactId>
+    <packaging>eclipse-repository</packaging>
+    <name>eclipse-cs Update Site</name>
+
+    <profiles>
+        <profile>
+            <id>bintray</id>
+            <build>
+                <plugins>
+                    <!-- Enable alternative deployer. -->
+                    <plugin>
+                        <groupId>com.carrotgarden.maven</groupId>
+                        <artifactId>bintray-maven-plugin</artifactId>
+                        <configuration>
+                            <skip>false</skip>
+                            <subject>eclipse-cs</subject>
+                            <repository>eclipse-cs</repository>
+                            <!-- Put Bintray credentials in settings.xml. -->
+                            <serverId>bintray</serverId>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>upload-update-site</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>upload</goal>
+                                </goals>
+                                <configuration>
+                                    <bintrayPackage>update-site</bintrayPackage>
+                                    <bintrayVersion>${unqualifiedVersion}</bintrayVersion>
+                                    <sourceFolder>${project.build.directory}/repository/</sourceFolder>
+                                    <targetFolder>${unqualifiedVersion}</targetFolder>
+                                    <performCleanup>true</performCleanup>
+                                    <cleanupRegex>^\Q${unqualifiedVersion}\E.*$</cleanupRegex>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>upload-update-site-archive</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>upload</goal>
+                                </goals>
+                                <configuration>
+                                    <bintrayPackage>update-site-archive</bintrayPackage>
+                                    <bintrayVersion>${unqualifiedVersion}</bintrayVersion>
+                                    <sourceFolder>${project.build.directory}/</sourceFolder>
+                                    <uploadRegex>.*\Qnet.sf.eclipsecs-updatesite_\E.*\.zip</uploadRegex>
+                                    <targetFolder>update-site-archive</targetFolder>
+                                    <performCleanup>true</performCleanup>
+                                    <cleanupRegex>^.*\Qnet.sf.eclipsecs-updatesite_${unqualifiedVersion}\E.*\.zip$</cleanupRegex>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

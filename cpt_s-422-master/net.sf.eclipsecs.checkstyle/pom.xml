@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>net.sf.eclipsecs.parent</artifactId>
+        <groupId>net.sf.eclipsecs</groupId>
+        <version>8.35.0-SNAPSHOT</version>
+        <relativePath>../eclipse-cs/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>net.sf.eclipsecs.checkstyle</artifactId>
+    <packaging>eclipse-plugin</packaging>
+    <name>Checkstyle Core Library Plugin</name>
+    
+    <properties>
+        <checkstyle.version>8.35</checkstyle.version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>download-checkstyle-src</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>.</outputDirectory>
+                            <url>https://github.com/checkstyle/checkstyle/archive/checkstyle-${checkstyle.version}.zip</url>
+                            <outputFileName>checkstyle-checkstyle-${checkstyle.version}.zip</outputFileName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>        
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <target>
+                                <delete dir="${project.build.directory}/checkstyle-src-unpack" />
+                                <delete dir="${project.build.directory}/checkstyle-src" />
+                                <first id="cssrc">
+                                    <fileset dir="." includes="checkstyle-checkstyle-*.zip" />
+                                </first>
+                                <unzip src="${toString:cssrc}" dest="${project.build.directory}/checkstyle-src-unpack">
+                                    <patternset>
+                                        <include name="**/src/main/java/**" />
+                                        <include name="**/src/main/resources/**" />
+                                    </patternset>
+                                </unzip>
+                                <copy todir="${project.build.directory}/checkstyle-src">
+                                    <fileset dir="${project.build.directory}/checkstyle-src-unpack">
+                                        <include name="**/*" />
+                                    </fileset>
+                                    <cutdirsmapper dirs="4" />
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-source-plugin</artifactId>
+                <configuration>
+                    <additionalFileSets>
+                        <fileSet>
+                            <directory>${project.build.directory}/checkstyle-src/</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileSet>
+                    </additionalFileSets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

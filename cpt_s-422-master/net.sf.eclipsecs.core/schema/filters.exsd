@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="net.sf.eclipsecs.core" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="net.sf.eclipsecs.core" id="filters" name="Checkstyle filters"/>
+      </appinfo>
+      <documentation>
+         This extension point can be used to provide specific filter sets.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="filter" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The extension point id this contribution shall apply to
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  A unique id for the extension.
+The id is used to identify the specific filter set.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  The human readable name of this extension.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="filter">
+      <annotation>
+         <documentation>
+            Element to define a filter for the filter set.
+         </documentation>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="data" minOccurs="0" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The fully qualified class name of the filter implementation.
+The filter class must implement &lt;code&gt;net.sf.eclipsecs.core.filters.IFilter&lt;/code&gt;.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="description" type="string" use="required">
+            <annotation>
+               <documentation>
+                  A description of the filter.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The human readable name of this filter.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="selected" type="string" use="default" value="false">
+            <annotation>
+               <documentation>
+                  Determines if the filter is selected by default.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="readonly" type="string" use="default" value="false">
+            <annotation>
+               <documentation>
+                  Determines if the filter can be selected or deselected.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="value" type="string">
+            <annotation>
+               <documentation>
+                  Can be used to apply a preconfigured value for editable filters.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="internal-name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="data">
+      <complexType>
+         <attribute name="value" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         4.0.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The following is an example of using the &lt;samp&gt;filters&lt;/samp&gt; extension point.
+
+&lt;pre&gt;
+&lt;extension
+    id=&quot;checkstyle.CheckstyleFilters&quot;
+    point=&quot;net.sf.eclipsecs.core.filters&quot;&gt;
+    &lt;filter
+        name=&quot;Sample Filter&quot;
+        internal-name=&quot;SampleFilter&quot;
+        description=&quot;Sample Filter&quot;
+        class=&quot;net.sf.eclipsecs.sample.filter.SampleFilter&quot;/&gt;
+&lt;/extension&gt;
+&lt;/pre&gt;
+      </documentation>
+   </annotation>
+
+
+
+
+</schema>

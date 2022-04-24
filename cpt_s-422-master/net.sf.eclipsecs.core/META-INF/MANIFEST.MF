@@ -1,0 +1,44 @@
+Manifest-Version: 1.0
+Bundle-Name: Eclipse Checkstyle
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: net.sf.eclipsecs.core;singleton:=true
+Bundle-Version: 8.35.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ClassPath: .,
+ lib/dom4j-2.1.3.jar
+Bundle-Activator: net.sf.eclipsecs.core.CheckstylePlugin
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: Eclipse Checkstyle Project
+Require-Bundle: net.sf.eclipsecs.checkstyle;visibility:=reexport
+Eclipse-BuddyPolicy: registered
+Bundle-Localization: core
+Export-Package: net.sf.eclipsecs.core,
+ net.sf.eclipsecs.core.builder,
+ net.sf.eclipsecs.core.config,
+ net.sf.eclipsecs.core.config.configtypes,
+ net.sf.eclipsecs.core.config.meta,
+ net.sf.eclipsecs.core.jobs,
+ net.sf.eclipsecs.core.nature,
+ net.sf.eclipsecs.core.projectconfig,
+ net.sf.eclipsecs.core.projectconfig.filters,
+ net.sf.eclipsecs.core.util
+Import-Package: org.eclipse.core.filebuffers,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.core.runtime.jobs,
+ org.eclipse.core.runtime.preferences,
+ org.eclipse.equinox.security.storage,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.internal.corext.fix,
+ org.eclipse.jdt.internal.ui.preferences,
+ org.eclipse.jdt.internal.ui.preferences.cleanup,
+ org.eclipse.jdt.internal.ui.preferences.formatter,
+ org.eclipse.jface.text,
+ org.eclipse.osgi.util,
+ org.eclipse.team.core;resolution:=optional,
+ org.eclipse.team.core.subscribers;resolution:=optional,
+ org.eclipse.team.core.synchronize;resolution:=optional,
+ org.osgi.framework,
+ org.osgi.service.prefs
+Automatic-Module-Name: net.sf.eclipsecs.core
+

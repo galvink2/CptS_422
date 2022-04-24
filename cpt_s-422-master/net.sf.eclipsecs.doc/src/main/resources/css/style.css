@@ -1,0 +1,53 @@
+#main {
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+
+#award-badge, #award-badge>.panel-body {
+    padding: 0;
+}
+
+#gh-banner img {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    border: 0;
+}
+
+.ad-container {
+    height: 280px;
+}
+
+/* Small devices (tablets, 530px and up) */
+@media ( min-width : 530px) {
+    .ad-container {
+        height: 60px;
+    }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media ( min-width : 768px) {
+    #main {
+        padding-top: 110px;
+    }
+    #gh-banner img {
+        top: 100px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media ( min-width : 992px) {
+    #main {
+        padding-top: 60px;
+    }
+    #gh-banner img {
+        top: 50px;
+    }
+    .ad-container {
+        height: 80px;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media ( min-width : 1200px) {
+}

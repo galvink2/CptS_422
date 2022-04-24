@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="net.sf.eclipsecs.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="net.sf.eclipsecs.ui" id="configtypesui" name="Checkstyle configuration type editors"/>
+      </appinfo>
+      <documentation>
+         This extension point can be used to provide custom configuration type ui.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="configtypeui" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The extension point id this contribution shall apply to
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  The human readable name of this extension.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="configtypeui">
+      <annotation>
+         <documentation>
+            Element to define a configuration type.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="editorclass" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The fully qualified class name of the configuration type editor implementation.
+The class must implement &lt;code&gt;net.sf.eclipsecs.ui.config.configtypes.ICheckConfigurationEditor&lt;/code&gt;.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="configtypename" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The internal name of the config type this ui part applies to.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="icon" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         4.0.0
+      </documentation>
+   </annotation>
+
+
+
+
+
+</schema>
